@@ -40,12 +40,12 @@ public class RotationActivity extends Activity implements SeekBar.OnSeekBarChang
     }
 
     @Override
-    public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
         Point newCoordinates = myDrawing.rotate(progress);
 
         // Now -> our float[] pts contains the new x,y coordinates
-        Log.i("test", "Before Rotate myPoint(" + newCoordinates.x + "," + newCoordinates.y + ")");
+        Log.i("test", "progress / degree = " + progress + "; After Rotate myPoint(" + newCoordinates.x + "," + newCoordinates.y + ")");
         myDrawing.invalidate();
 
     }
