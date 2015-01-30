@@ -2,17 +2,15 @@
 
 package bradleege.com.pointrotatationdemo;
 
+import android.app.Activity;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 
-public class RotationActivity extends ActionBarActivity implements SeekBar.OnSeekBarChangeListener {
+public class RotationActivity extends Activity implements SeekBar.OnSeekBarChangeListener {
 
 
     private MyDrawing myDrawing;
@@ -30,13 +28,11 @@ public class RotationActivity extends ActionBarActivity implements SeekBar.OnSee
         int y = (int) (rect.top + Math.random() * rect.height());
         Point coordinate = new Point(x, y);
 
-
         // To draw the rect we create a CustomView
         myDrawing = new MyDrawing(this, rect, coordinate);
 
         RelativeLayout rl = (RelativeLayout)findViewById(R.id.container);
         rl.addView(myDrawing);
-
 
         mSeekbar = (SeekBar)findViewById(R.id.seekBar1);
         mSeekbar.setMax(360);
@@ -44,35 +40,12 @@ public class RotationActivity extends ActionBarActivity implements SeekBar.OnSee
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_rotation, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
 
         Point newCoordinates = myDrawing.rotate(progress);
 
-
         // Now -> our float[] pts contains the new x,y coordinates
-        Log.d("test", "Before Rotate myPoint(" + newCoordinates.x + "," + newCoordinates.y + ")");
+        Log.i("test", "Before Rotate myPoint(" + newCoordinates.x + "," + newCoordinates.y + ")");
         myDrawing.invalidate();
 
     }
